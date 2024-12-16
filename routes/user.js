@@ -14,7 +14,10 @@ router.get('/signup', (req,res) => {
 // user login
 router.post('/signin', async (req,res) => {
     const { email, password } = req.body
-    await User.findOne
+    const user = await User.matchPassword(email, password);
+
+    console.log('User', user)   // debugging
+    return res.redirect('/')
 })
 
 // user register
