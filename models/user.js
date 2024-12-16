@@ -28,7 +28,27 @@ const userSchema = new Schema({
     }
 }, { timestamps: true });
 
-// validate the user if the password is changed
+// matching password for login
+userSchema.static('matchPassword', async function(email,password){
+    const user = await this.findOne({ email })
+    if(!user) throw new Error('User Not Found');
+
+    // retrieving the salt and hashedpassword from the db
+    const salt = user.salt;
+    const hashedPassword = user.password;
+
+    // create hash version of the password provided by the user
+    const userProvidedHash = createHmac('sha256', salt)
+    .update(password).digest('hex');
+
+    // match the passowrd given by the user to the stored in the database
+    if(hashedPassword !== userProvidedHash) throw new Error('Incorrect Password')
+
+    return user;
+
+})
+
+// save the password when user registers by hashing it
 userSchema.pre('save', function (next) {
     const user = this;  
     if(!user.isModified('password')) return;
