@@ -28,6 +28,7 @@ app.use(cookieparser());
 app.use(checkForAunthenticationCookie('token'))
 app.use(express.static(path.resolve('./public')))
 
+// routes
 app.get('/', async (req, res) => {
     const allBlogs = await Blog.find({})
     res.render('home',{
