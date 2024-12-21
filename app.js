@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express');
 const path = require('path');
 const userRouter = require('./routes/user')
@@ -8,10 +9,10 @@ const { checkForAunthenticationCookie } = require('./middlewares/authentication'
 const Blog = require('./models/blog')
 
 const app = express();
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT;
 
 // connecting to the database
-mongoose.connect('mongodb://localhost:27017/wordweave').then(() => {
+mongoose.connect(process.env.MONGO_URL).then(() => {
     console.log("MongoDB Connected SuccesFully")
 })
 
