@@ -44,7 +44,7 @@ This is a simple Blog Application built using **Node.js**, **Express.js**, **EJS
    - Add the following variables:
 
      ```env
-     PORT=3000
+     PORT=8000
      MONGO_URI=<your-mongodb-connection-string>
      SESSION_SECRET=<your-session-secret>
      ```
@@ -55,4 +55,4 @@ This is a simple Blog Application built using **Node.js**, **Express.js**, **EJS
    npm start
    ```
 
-5. Open your browser and navigate to `http://localhost:3000`.
+5. Open your browser and navigate to `http://localhost:8000`.
